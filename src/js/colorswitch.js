@@ -18,11 +18,13 @@ const refs = {
   start: document.querySelector('[data-action="start"]'),
   stop: document.querySelector('[data-action="stop"]'),
 };
+refs.stop.disabled = true;
 
 refs.start.addEventListener('click', () => {
   if (timerID) return;
 
   refs.start.disabled = true;
+  refs.stop.disabled = false;
 
   timerID = setInterval(() => {
     const randomColorsIndex = randomIntegerFromInterval(min, max);
@@ -34,6 +36,8 @@ refs.start.addEventListener('click', () => {
 
 refs.stop.addEventListener('click', () => {
   refs.start.disabled = false;
+  refs.stop.disabled = true;
+
   clearInterval(timerID);
   timerID = null;
 });
